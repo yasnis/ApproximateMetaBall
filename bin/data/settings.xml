@@ -1,0 +1,31 @@
+<group>
+	<group/>
+<Parameter_Group_0>
+		<Param_0>0.392857</Param_0>
+		<Param_1>29</Param_1>
+		<Param_2>0</Param_2>
+	</Parameter_Group_0>
+	<Parameter_Group_1>
+		<Param_0>0.3</Param_0>
+		<Param_1>128</Param_1>
+		<Param_2>0</Param_2>
+	</Parameter_Group_1>
+<Setting>
+		<Parameter_Group_0>
+			<Param_0>0.451531</Param_0>
+			<Param_1>129</Param_1>
+			<Param_2>81</Param_2>
+		<IR_Threshold>116.224</IR_Threshold>
+		</Parameter_Group_0>
+	<UnknownName>0</UnknownName>
+	<param_group1_param0>1</param_group1_param0>
+	<toggle>1</toggle>
+	<group>
+			<toggle>0</toggle>
+		</group>
+	<Parameter_Group_1>
+			<toggle>1</toggle>
+		<string>test</string>
+		</Parameter_Group_1>
+	</Setting>
+</group>
