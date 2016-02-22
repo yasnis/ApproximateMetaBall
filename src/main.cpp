@@ -42,24 +42,23 @@ class ofApp : public ofBaseApp{
     
     ofxBlur blur;
     
+    bool updateFlag = false;
+    
+    vector<ofVec3f> results;
+    
     //--------------------------------------------------------------
     void setup(){
         ofBackground(0);
         ofSetFrameRate(60);
         ofSetVerticalSync(true);
-//        ofSetCircleResolution(32);
+        ofSetCircleResolution(32);
         
         setupGUI();
-        
-        image.loadImage("sample.png");
-        image.setImageType(OF_IMAGE_COLOR);
-//        color.
-        color.setFromPixels(image.getPixelsRef());
-//        approximate.startThread(true, true);
-//        metaball
+        image.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
         metaball.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
         blur.setup(ofGetWidth(), ofGetHeight(), 10, 0.2, 4);
-//        metaball.
+        
+        addCircle();
     }
     
     void setupGUI() {
@@ -68,8 +67,8 @@ class ofApp : public ofBaseApp{
         gui.setName("Setting");
         param_group0.setName("Parameter Group 0");
         param_group0.add(param_group0_param0.set("IR Threshold", 128, 0.0, 255.0));
-        param_group0.add(param_group0_param1.set("Param 1", 128, 0, 255));
-        param_group0.add(param_group0_param2.set("Param 2", 0, 0, 255));
+        param_group0.add(param_group0_param1.set("Background", 128, 0, 255));
+        param_group0.add(param_group0_param2.set("Blur Length", 0, 0, 32));
         gui.add(param_group0);
         param_group1.setName("Parameter Group 1");
         param_group1.add(param_group1_param0.set("toggle", false));
@@ -106,45 +105,45 @@ class ofApp : public ofBaseApp{
             }
         }
         
-        blur.setScale(ofMap(mouseX, 0, ofGetWidth(), 0, 32));
-//        blur.setRotation(ofMap(mouseY, 0, ofGetHeight(), -PI, PI));
-        updateContour();
+        blur.setScale(param_group0_param2);
+        
+        if(color.width==0)return;
+        if (approximate.isStopped) {
+            results = approximate.results;
+            updateContour();
+            approximate.startThread();
+        }
     }
     void updateContour(){
+//        cout << "updateContour" << endl;
         binary = color;
-        binary.threshold(128);
+        binary.threshold(param_group0_param0);
         contourFinder.findContours(binary, 100, image.width*image.height, 10, true);
         contourFinder.blobs;
         if(contourFinder.blobs.size()>0){
-            //            blob = *contourFinder.blobs.begin();
-            //            cout << blob.boundingRect << endl;
-            
-            approximate.blob = *contourFinder.blobs.begin();
+            approximate.blobs = contourFinder.blobs;
         }
     }
     
     //--------------------------------------------------------------
     void draw() {
-//        ofEnableBlendMode(OF_BLENDMODE_ADD);
-        ofBackground(32);
-        if(drawImage) {
-            binary.draw(0, 0);
-//            blur.draw();
-//            color.draw(0, 0);
-        }
+        ofBackground(param_group0_param1);
         drawMetaball();
-//        binary.draw(0, 0);
-        ofEnableBlendMode(OF_BLENDMODE_DISABLED);
-//        contourFinder.draw(0, 0);
-//        ofFill();
-//        ofCircle(approximate.current.x, approximate.current.y, 4);
-        ofSetColor(50, 70, 167);
-        vector<ofVec3f>::iterator c = approximate.results.begin();
-        while (c!=approximate.results.end()) {
+        
+        if(drawImage) {
+            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            binary.draw(0, 0);
+            //            blur.draw();
+            //            color.draw(0, 0);
+            ofEnableBlendMode(OF_BLENDMODE_DISABLED);
+        }
+        vector<ofVec3f>::iterator c = results.begin();
+        while (c!=results.end()) {
+            ofNoFill();
+            ofSetColor(50, 70, 167);
+            ofCircle(c->x, c->y, c->z);
             ofFill();
             ofCircle(c->x, c->y, 2);
-            ofNoFill();
-            ofCircle(c->x, c->y, c->z);
             c++;
         }
         ofSetColor(167, 70, 50);
@@ -152,15 +151,16 @@ class ofApp : public ofBaseApp{
 //        ofRect(approximate.area.x, approximate.area.y, approximate.area.width, approximate.area.height);
 //        ofCircle(approximate.circle.x, approximate.circle.y, approximate.circle.z);
         ofSetColor(255);
+//        }
         if(mode == AppMode_Debug) {
             drawDebug();
         }
         
     }
     void drawMetaball() {
+//        cout << "drawMetaball" << endl;
         blur.begin();
         ofFill();
-//        ofClear(0,0,0, 255);
         ofSetColor(0, 0, 0);
         ofRect(0, 0, ofGetWidth(), ofGetHeight());
         ofSetColor(255);
@@ -171,10 +171,7 @@ class ofApp : public ofBaseApp{
         }
         blur.end();
         metaball.begin();
-                ofClear(0,0,0, 255);
-//        ofSetColor(0, 0, 0);
-//        ofRect(0, 0, ofGetWidth(), ofGetHeight());
-//        ofSetColor(255);
+        ofClear(0,0,0, 255);
         blur.draw();
         metaball.end();
         
@@ -223,7 +220,7 @@ class ofApp : public ofBaseApp{
             if(!approximate.isThreadRunning()){
                 approximate.startThread();
             }
-            approximate.reset();
+//            approximate.reset();
         }else if(key == 'b') {
             drawImage = !drawImage;
         }else if(key == OF_KEY_UP) {

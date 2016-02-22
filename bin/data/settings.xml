@@ -13,9 +13,11 @@
 <Setting>
 		<Parameter_Group_0>
 			<Param_0>0.451531</Param_0>
-			<Param_1>129</Param_1>
-			<Param_2>81</Param_2>
-		<IR_Threshold>116.224</IR_Threshold>
+			<Param_1>0</Param_1>
+			<Param_2>3</Param_2>
+		<IR_Threshold>77.1939</IR_Threshold>
+		<Background>76</Background>
+			<Blur_Length>3</Blur_Length>
 		</Parameter_Group_0>
 	<UnknownName>0</UnknownName>
 	<param_group1_param0>1</param_group1_param0>
