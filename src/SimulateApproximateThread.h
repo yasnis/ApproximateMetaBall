@@ -14,8 +14,6 @@
 
 class SimulateApproximateThread : public ofThread {
 public:
-    ofxCvGrayscaleImage binary;
-//    ofxCvBlob blob;
     
     vector<ofxCvBlob>::iterator blob;
     vector<ofxCvBlob> blobs;
@@ -25,18 +23,17 @@ public:
     ofPoint current;
     
     vector<ofVec3f> results;
+    vector<ofVec3f> results_static;
     vector<ofVec3f> results_old;
     
     int step = 10;
     int anglestep = 45;
     int min_radius = 50;
-    
+    int radius_step = 10;
     int starttime = 0;
-    
     bool isStopped = true;
     
     void threadedFunction() {
-//        cout << "--  Start Thread  --" << endl;
         results.clear();
         results_old.clear();
         isStopped = false;
@@ -46,8 +43,6 @@ public:
         }
     }
     void reset() {
-//        cout << "reset" << endl;
-        //*
         results_old = results;
         if(results_old.size()>0) {
             vector<ofVec3f> v;
@@ -62,32 +57,18 @@ public:
             }
             results = v;
          }
-         //*/
-//        cout << "blobs.size() : " << blobs.size() << endl;
         blob = blobs.begin();
         resetCircle();
         starttime = ofGetElapsedTimeMillis();
     }
     void resetCircle(){
-//        cout << "resetCircle : " << "area : " << blob->area << ", width : " << blob->boundingRect.width << ", height : " << blob->boundingRect.height << endl;
-        //*
         circle.z = min(blob->boundingRect.width, blob->boundingRect.height)/2;
-//        step = circle.z/7;
-//        min_radius = circle.z/2;
-        step = circle.z/7;
-        min_radius = circle.z/3;
-        /*/
-         results.clear();
-         circle.z = min(blob.boundingRect.width, blob.boundingRect.height)/2;
-         step = 1;
-         min_radius = 0;
-         //*/
+        step = circle.z/radius_step;
         
         if(step < 1)step = 1;
     }
     
     void update() {
-//        cout << "update : " << abs(distance(blob, blobs.begin()))+1 << "/" << blobs.size() << endl;
         circle.x = blob->boundingRect.x + circle.z;
         circle.y = blob->boundingRect.y + circle.z;
         updateArea();
@@ -97,9 +78,7 @@ public:
                 
                 bool b = true;
                 b = PointInPolygon(ofPoint(x, y), blob->pts);
-                //*
                 if(b){
-                    //*
                     vector<ofVec3f>::iterator c = results.begin();
                     vector<ofVec3f>::iterator e = results.end();
                     while (c!=e) {
@@ -110,7 +89,6 @@ public:
                         }
                         c++;
                     }
-                    //*
                     if(b) {
                         circle.x = x;
                         circle.y = y;
@@ -118,28 +96,19 @@ public:
                             x+=circle.z-1;
                         }
                     }
-                    //*/
                 }
-//                cout << "x : " << x << ", "<< area.x + area.width << ", " << step << ", " << (x <= area.x + area.width) << endl;
-//                cout << "y : " << y << ", "<< area.y + area.height << ", " << step << ", " << (y <= area.y + area.height) << endl;
-//                cout << i++ << ": " <<x << " , " <<y << ", (" << area<< ")" <<  endl;
             }
         }
         circle.z -= step;
-//        cout << "test : " << circle.z << ", " << min_radius  << ", " << step << endl;
         if(circle.z <= min_radius) {
-            //*
-//            cout << "distance : " <<  distance(blob, blobs.end()) << endl;
             if(distance(blob, blobs.end())-1 != 0){
                 blob++;
                 resetCircle();
                 return;
             }
-            //*/
-//            sleep(100);
-            cout << "loop : " << ofGetElapsedTimeMillis() - starttime << "ms, " << results.size() << endl;
+//            cout << "loop : " << ofGetElapsedTimeMillis() - starttime << "ms, " << results.size() << endl;
+            results_static = results;
             isStopped = true;
-//            cout << "--  Stop Thread  --" << endl;
             stopThread();
         }
     }
@@ -149,6 +118,24 @@ public:
         area.width = blob->boundingRect.width - circle.z*2;
         area.height = blob->boundingRect.height - circle.z*2;
     }
+    
+    void draw() {
+        if(results_static.size()==0)return;
+        vector<ofVec3f>::iterator c = results.begin();
+        while (c!=results.end()) {
+            ofNoFill();
+            ofCircle(c->x, c->y, c->z);
+            ofFill();
+            ofCircle(c->x, c->y, 2);
+            c++;
+        }
+    }
+    void drawProcess() {
+        ofNoFill();
+        ofRect(area.x, area.y, area.width, area.height);
+        ofCircle(circle.x, circle.y, circle.z);
+    }
+    
     bool checkInside(ofVec3f c){
         float rad = 0;
         float step = M_PI/180*anglestep;

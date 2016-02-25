@@ -12,6 +12,8 @@
 	<dict>
 		<key>DECEA36F317DEBFCCB1DB4C219040731305AD432</key>
 		<string>https://github.com/yasnis/ofMinimalProjectWithUI.git</string>
+		<key>EC506592F8CF4BB2FF596E70734A817091663FAC</key>
+		<string>https://github.com/satoruhiga/ofxOpenGLContextScope.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ApproximateMetaBall.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>DECEA36F317DEBFCCB1DB4C219040731305AD432</key>
 		<string>../..</string>
+		<key>EC506592F8CF4BB2FF596E70734A817091663FAC</key>
+		<string>../../../of_v0.9.0_osx_release/addons/ofxOpenGLContextScope</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/yasnis/ofMinimalProjectWithUI.git</string>
@@ -35,6 +39,14 @@
 			<string>DECEA36F317DEBFCCB1DB4C219040731305AD432</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ApproximateMetaBall</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EC506592F8CF4BB2FF596E70734A817091663FAC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxOpenGLContextScope</string>
 		</dict>
 	</array>
 </dict>

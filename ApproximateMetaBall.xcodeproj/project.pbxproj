@@ -28,6 +28,7 @@
 		D255BE5A1C739503008451DB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D255BE591C739503008451DB /* AVFoundation.framework */; };
 		D255BE5C1C73951B008451DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D255BE5B1C73951B008451DB /* QuartzCore.framework */; };
 		D255BE5E1C73952B008451DB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D255BE5D1C73952B008451DB /* CoreMedia.framework */; };
+		D2DC5ACE1C7F312B00DA0C29 /* ofxOpenGLContextScope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DC5ACC1C7F312B00DA0C29 /* ofxOpenGLContextScope.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -204,6 +205,8 @@
 		D255BE5B1C73951B008451DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		D255BE5D1C73952B008451DB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		D2C452FE1C718EC20080CC1E /* SimulateApproximateThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulateApproximateThread.h; sourceTree = "<group>"; };
+		D2DC5ACC1C7F312B00DA0C29 /* ofxOpenGLContextScope.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOpenGLContextScope.cpp; sourceTree = "<group>"; };
+		D2DC5ACD1C7F312B00DA0C29 /* ofxOpenGLContextScope.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOpenGLContextScope.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -265,6 +268,7 @@
 				D255BE401C7393C4008451DB /* ofxBlur */,
 				D222B4991C4A86940028D66E /* ofxOpenCv */,
 				D23D17071AF68091006DC265 /* ofxGui */,
+				D2DC5ACA1C7F312B00DA0C29 /* ofxOpenGLContextScope */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -627,6 +631,24 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		D2DC5ACA1C7F312B00DA0C29 /* ofxOpenGLContextScope */ = {
+			isa = PBXGroup;
+			children = (
+				D2DC5ACB1C7F312B00DA0C29 /* src */,
+			);
+			name = ofxOpenGLContextScope;
+			sourceTree = "<group>";
+		};
+		D2DC5ACB1C7F312B00DA0C29 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D2DC5ACC1C7F312B00DA0C29 /* ofxOpenGLContextScope.cpp */,
+				D2DC5ACD1C7F312B00DA0C29 /* ofxOpenGLContextScope.h */,
+			);
+			name = src;
+			path = ../../../../of_v0.9.0_osx_release/addons/ofxOpenGLContextScope/src;
+			sourceTree = "<group>";
+		};
 		E4328144138ABC890047C5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -782,6 +804,7 @@
 				D222B51B1C4A86940028D66E /* ofxCvShortImage.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				D23D171C1AF68091006DC265 /* ofxGuiGroup.cpp in Sources */,
+				D2DC5ACE1C7F312B00DA0C29 /* ofxOpenGLContextScope.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

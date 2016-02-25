@@ -1,33 +1,13 @@
-<group>
-	<group/>
-<Parameter_Group_0>
-		<Param_0>0.392857</Param_0>
-		<Param_1>29</Param_1>
-		<Param_2>0</Param_2>
-	</Parameter_Group_0>
-	<Parameter_Group_1>
-		<Param_0>0.3</Param_0>
-		<Param_1>128</Param_1>
-		<Param_2>0</Param_2>
-	</Parameter_Group_1>
 <Setting>
-		<Parameter_Group_0>
-			<Param_0>0.451531</Param_0>
-			<Param_1>0</Param_1>
-			<Param_2>3</Param_2>
-		<IR_Threshold>77.1939</IR_Threshold>
-		<Background>76</Background>
-			<Blur_Length>3</Blur_Length>
-		</Parameter_Group_0>
-	<UnknownName>0</UnknownName>
-	<param_group1_param0>1</param_group1_param0>
-	<toggle>1</toggle>
-	<group>
-			<toggle>0</toggle>
-		</group>
-	<Parameter_Group_1>
-			<toggle>1</toggle>
-		<string>test</string>
-		</Parameter_Group_1>
-	</Setting>
-</group>
+	<Base_Setting.>
+		<IR_Threshold>96.7092</IR_Threshold>
+		<Background>19</Background>
+		<Blur_Length>3</Blur_Length>
+	</Base_Setting.>
+	<Approximate_Setting.>
+		<toggle>0</toggle>
+		<string>7</string>
+	<Minimum_radius>50</Minimum_radius>
+	</Approximate_Setting.>
+<Setting/>
+</Setting>
